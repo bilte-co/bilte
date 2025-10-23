@@ -122,6 +122,19 @@
       "graduation": "2010"
     }
   ],
+  "publications": [
+    {
+      "date": "2025-10-15T00:00:00Z",
+      "year": "2025",
+      "publisher": "eLife",
+      "issue": "13:RP103977",
+      "title": "Exploring neurodevelopment via spatiotemporal collation of anatomical networks with NeuroSC",
+      "url": "https://doi.org/10.7554/eLife.103977.3",
+      "authors": "Noelle L Koonce Sarah E Emerson Dhananjay Bhaskar Manik Kuchroo Mark W Moyle Pura Arroyo-Morales Nabor Vázquez-Martínez Jamie I Emerson Smita Krishnaswamy William A Mohler Daniel A Colón-Ramos",
+      "contribution": "(Co-author: Jamie Emerson — Contributed to Conceptualization, Software, Visualization, Methodology, Writing – review and editing)",
+      "partnership": "(In collaboration with Yale University and the University of Connecticut Health Center, with contributing authors additionally affilated with BYU–Idaho, the Marine Biological Laboratory, and Universidad de Puerto Rico.)"
+    }
+  ],
   "interests": [
     "mountain biking",
     "alpine skiing",

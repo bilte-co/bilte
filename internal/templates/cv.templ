@@ -76,6 +76,22 @@ templ CV(production *bool, info domain.Resume, projects domain.Projects) {
 							}
 						</ol>
 					}
+					if len(info.Publications) > 0 {
+						<h3>Publications</h3>
+						<ol>
+							for _, item := range info.Publications {
+								<li>
+									{ item.Authors } ({ item.Year }). <strong>{item.Title}</strong> <em>{item.Publisher}</em> {item.Issue}. <a href="{item.URL}" target="_blank">{item.URL}</a>
+									<br>
+									<br>
+									{item.Contribution}
+									<br>
+									<br>
+									{item.Partnership}
+								</li>
+							}
+						</ol>
+					}
 					if len(info.Education) > 0 {
 						<h3>Education</h3>
 						<ol>

@@ -1,5 +1,7 @@
 package domain
 
+import "time"
+
 type Projects map[string][]Project
 
 type Project struct {
@@ -39,6 +41,18 @@ type Education struct {
 	Graduation  string `json:"graduation"`
 }
 
+type Publication struct {
+	Date         time.Time `json:"date"`
+	Year         string    `json:"year"`
+	Title        string    `json:"title"`
+	URL          string    `json:"url"`
+	Authors      string    `json:"authors"`
+	Contribution string    `json:"contribution"`
+	Partnership  string    `json:"partnership"`
+	Publisher    string    `json:"publisher"`
+	Issue        string    `json:"issue"`
+}
+
 type Competancy struct {
 	Name  string   `json:"name"`
 	Items []string `json:"items"`
@@ -56,5 +70,6 @@ type Resume struct {
 	Experience      []Experience      `json:"experience"`
 	OtherExperience []OtherExperience `json:"other_experience"`
 	Education       []Education       `jsone:"education"`
+	Publications    []Publication     `jsone:"publications"`
 	Interests       []string          `json:"interests"`
 }

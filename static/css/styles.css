@@ -90,6 +90,15 @@ h6 {
     --gray-950: oklch(14.5% 0 0);
     --background: var(--gray-100);
     --text: var(--gray-800);
+    --decoration: var(--gray-400);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--gray-900);
+    --text: var(--gray-100);
+    --decoration: var(--gray-700);
+  }
 }
 
 /* @font-face {
@@ -144,7 +153,7 @@ a {
     background-color: transparent;
     transition: text-decoration-color 0.3s ease-in-out;
     color: var(--text);
-    text-decoration-color: var(--gray-400);
+    text-decoration-color: var(--decoration);
 }
 
 a:visited {
@@ -152,7 +161,7 @@ a:visited {
 }
 
 a:hover {
-    text-decoration-color: var(--gray-800);
+    text-decoration-color: var(--text);
 }
 
 img {
