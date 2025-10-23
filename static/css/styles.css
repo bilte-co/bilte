@@ -154,6 +154,10 @@ a {
     transition: text-decoration-color 0.3s ease-in-out;
     color: var(--text);
     text-decoration-color: var(--decoration);
+
+    &:visited {
+      color: var(--text);
+    }
 }
 
 a:visited {
