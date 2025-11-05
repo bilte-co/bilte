@@ -36,3 +36,7 @@ sec:
 vuln:
 	@echo "Running gosec..."
 	govulncheck ./...
+
+templ:
+	@echo "Building templates..."
+	go tool templ generate
