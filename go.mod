@@ -12,7 +12,6 @@ require (
 	github.com/joho/godotenv v1.5.1
 	github.com/lmittmann/tint v1.0.7
 	github.com/maypok86/otter v1.2.4
-	github.com/nats-io/nats.go v1.42.0
 	github.com/oklog/ulid v1.3.1
 	github.com/openai/openai-go v0.1.0-beta.10
 	github.com/samber/slog-gin v1.15.0
@@ -71,8 +70,6 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/natefinch/atomic v1.0.1 // indirect
-	github.com/nats-io/nkeys v0.4.11 // indirect
-	github.com/nats-io/nuid v1.0.1 // indirect
 	github.com/ncruces/go-strftime v0.1.9 // indirect
 	github.com/paulmach/orb v0.11.1 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
