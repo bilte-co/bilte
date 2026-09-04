@@ -1,78 +1,73 @@
 {
+  "beta-technologies": [
+    {
+      "client_name": "Public Web Platform",
+      "technologies": [
+        "Go",
+        "TypeScript",
+        "PostgreSQL",
+        "Docker",
+        "AWS ECS",
+        "CI/CD"
+      ],
+      "description": "Built BETA's public web platform as a Go and TypeScript service backed by PostgreSQL, containerized on AWS ECS, and delivered through CI/CD. Added site-wide event instrumentation and improved Lighthouse performance, creating a measurable foundation for adoption and conversion analysis."
+    }
+  ],
   "bilte-co": [
     {
-      "company": "bilte-co",
       "client_name": "Southwest Airlines",
       "technologies": [
         "Go",
-        "Postgres",
-        "Clickhouse",
         "MQTT",
-        "SQL",
-        "Python",
+        "PostgreSQL",
+        "ClickHouse",
         "TypeScript",
-        "HTMX",
-        "Tailwind"
+        "htmx"
       ],
-      "description": "Conceived, architected, and deployed the industry’s first integrated flight-insights platform, exposing high-impact operational intelligence previously nebulous to frontline and executive leadership. Engineered a horizontally scalable ingestion pipeline that fuses multi-modal data via distributed stream processing, columnar storage, and adaptive partitioning—algorithms heretofore unproven in the tactical operational space. Delivered a production-ready proof of concept in a fraction of the sector’s typical cycle time, establishing a new benchmark for speed-to-value and decision superiority."
+      "description": "As sole engineer on a two-person team, delivered an integrated flight-operations insights platform in three months on a five-figure budget. A Go and MQTT ingestion pipeline loaded millions of aircraft and ground-vehicle telemetry points into PostgreSQL and ClickHouse in minutes, revealing previously invisible over-resourcing and utilization gaps. The proof of concept validated the business case for later enterprise-scale investment."
     },
     {
-      "company": "bilte-co",
-      "client_name": "Yale University",
+      "client_name": "socky.flights",
       "technologies": [
         "Go",
-        "React",
-        "Redux",
-        "SQL",
-        "Docker",
-        "Tailwind",
-        "fly.io"
+        "NATS",
+        "PostgreSQL",
+        "htmx"
       ],
-      "description": "Worked closely with neuroscientists and researchers to design and build an internal genome management platform, replacing a legacy manual-entry system. This work cleaned up and improved decades of historic data, created previously unavailable relationships between the records, and eliminated systemic data errors, enabling researchers to more confidently and rapidly achieve their work."
+      "description": "Built a private aerospace performance analysis and competitive intelligence platform that provides realtime airport, fleet, and aircraft performance and utilization metrics, enabling industry comparison, competative research, surfacing trends, and enabling more efficient resource utilization."
     },
     {
-      "company": "bilte-co",
-      "client_name": "Sustainable",
-      "technologies": [
-        "PHP",
-        "Laravel",
-        "Postgres",
-        "TypeScript",
-        "NextJS",
-        "Tailwind"
-      ],
-      "description": "As the CTO of an ESG data startup, I hired and managed a small team of senior engineers to build products making sustainability data more accessible and consumable to the public, as well as tooling for companies to more easily report ESG metrics. My strategies put us in the top 5 results on Google for nearly all major brand sustainability searches and enabled us to rapidly iterate on numerous products."
-    },
-    {
-      "company": "bilte-co",
-      "client_name": "NetApp",
-      "technologies": ["TypeScript", "CSS", "SQL"],
-      "description": "Optimized data infrastructure and leveraged it to deploy personalization strategies across multiple domains around the world. These efforts resulted in very strong business results, frequently achieving 3x the conversion rates of the control and reducing engineering lift 10-20x."
-    },
-    {
-      "company": "bilte-co",
-      "client_name": "Strava",
-      "technologies": ["HTML", "CSS", "TypeScript"],
-      "description": "Delivered a dynamic, data-powered marketing site targeting municipal customers. By integrating city-specific product insights, in partnership with internal teams, we translated raw data into personalized narratives to drive qualified organic leads."
-    },
-    {
-      "company": "bilte-co",
-      "client_name": "Gloo",
-      "technologies": ["GraphQL", "SSO", "MFA", "IAM", "React", "TypeScript"],
-      "description": "Led a team of developers to optimize and enrich various aspects of distributed products, including authentication systems, analytics tooling, and custom CMS solutions. This enabled the company to better scale with its growing customer base and widening portfolio."
-    },
-    {
-      "company": "bilte-co",
       "client_name": "Visionair",
       "technologies": [
         "Go",
-        "Postgres",
+        "PostgreSQL",
         "Python",
         "PHP",
         "Elasticsearch",
         "Prometheus"
       ],
-      "description": "Architected, built, and optimized the core data infrastructure and technical solutions powering the processing of hundreds of millions of artifacts daily, directly enabling the company to secure $500K–$3M contracts with the world’s largest genealogy companies."
+      "description": "Designed and optimized infrastructure for ingesting, indexing, searching, and monitoring hundreds of millions of genealogical artifacts per day, supporting enterprise contracts valued at $500K–$3M."
+    },
+    {
+      "client_name": "Yale University",
+      "technologies": ["Go", "React", "SQL", "Docker", "Fly.io"],
+      "description": "Designed a curated research-data platform with Yale neuroscientists, replacing manual workflows and normalizing decades of genomic records. The system surfaced relationships across datasets, reduced recurring data-entry errors, and supported analysis and peer-reviewed publication."
+    },
+    {
+      "client_name": "Sustainable",
+      "technologies": [
+        "PHP",
+        "Laravel",
+        "PostgreSQL",
+        "TypeScript",
+        "Next.js"
+      ],
+      "description": "Served as fractional CTO for an ESG data startup, hiring and leading a senior engineering team while guiding product architecture and delivery. Built public data products and reporting tools that helped achieve top-five organic Google rankings for key brand-sustainability queries."
+    },
+    {
+      "client_name": "NetApp",
+      "technologies": ["TypeScript", "CSS", "SQL"],
+      "description": "Modernized personalization and measurement flows across NetApp's global web properties. The resulting campaigns delivered conversion rates roughly 3× the control rate while requiring an estimated 90–95% less engineering effort to implement."
     }
   ]
 }

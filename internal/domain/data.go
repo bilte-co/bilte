@@ -5,7 +5,6 @@ import "time"
 type Projects map[string][]Project
 
 type Project struct {
-	Company      string   `json:"company"`
 	ClientName   string   `json:"client_name"`
 	Technologies []string `json:"technologies"`
 	Description  string   `json:"description"`
@@ -53,7 +52,7 @@ type Publication struct {
 	Issue        string    `json:"issue"`
 }
 
-type Competancy struct {
+type Competency struct {
 	Name  string   `json:"name"`
 	Items []string `json:"items"`
 }
@@ -66,10 +65,10 @@ type Resume struct {
 	Location        string            `json:"location"`
 	Links           []Link            `json:"links"`
 	Intro           string            `json:"intro"`
-	Competencies    []Competancy      `json:"competencies"`
+	Competencies    []Competency      `json:"competencies"`
 	Experience      []Experience      `json:"experience"`
 	OtherExperience []OtherExperience `json:"other_experience"`
-	Education       []Education       `jsone:"education"`
-	Publications    []Publication     `jsone:"publications"`
+	Education       []Education       `json:"education"`
+	Publications    []Publication     `json:"publications"`
 	Interests       []string          `json:"interests"`
 }

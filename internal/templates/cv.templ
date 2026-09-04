@@ -81,7 +81,7 @@ templ CV(production *bool, info domain.Resume, projects domain.Projects) {
 						<ol>
 							for _, item := range info.Publications {
 								<li>
-									{ item.Authors } ({ item.Year }). <strong>{item.Title}</strong> <em>{item.Publisher}</em> {item.Issue}. <a href="{item.URL}" target="_blank">{item.URL}</a>
+									{ item.Authors } ({ item.Year }). <strong>{item.Title}</strong> <em>{item.Publisher}</em> {item.Issue}. <a href={ templ.URL(item.URL) } target="_blank">{item.URL}</a>
 									<br>
 									<br>
 									{item.Contribution}

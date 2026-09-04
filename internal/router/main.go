@@ -2,101 +2,113 @@ package router
 
 import (
 	"encoding/json"
-	"io"
+	"log/slog"
 	"net/http"
 	"os"
+	"path/filepath"
+	"time"
 
-	healthcheck "github.com/RaMin0/gin-health-check"
-	brotli "github.com/anargu/gin-brotli"
 	"github.com/bilte-co/bilte/internal/domain"
 	"github.com/bilte-co/bilte/internal/templates"
-	"github.com/gin-gonic/gin"
-
-	// "github.com/nats-io/nats.go"
-	stats "github.com/semihalev/gin-stats"
 	"golang.org/x/time/rate"
 )
 
-var limiter = rate.NewLimiter(50, 200)
+const (
+	defaultDataDir   = "data"
+	defaultStaticDir = "static"
+)
 
-func rateLimiter(c *gin.Context) {
-	if !limiter.Allow() {
-		c.JSON(http.StatusTooManyRequests, gin.H{"error": "too many requests"})
-		c.Abort()
-		return
-	}
-	c.Next()
+type Config struct {
+	Production bool
+	StaticDir  string
+	DataDir    string
+	Logger     *slog.Logger
 }
 
-func HeadersMiddleware() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		c.Writer.Header().Set("Content-Type", "text/event-stream")
-		c.Writer.Header().Set("Cache-Control", "no-cache")
-		c.Writer.Header().Set("Connection", "keep-alive")
-		c.Writer.Header().Set("Transfer-Encoding", "chunked")
-		c.Next()
-	}
-}
+func NewRouter(cfg Config) http.Handler {
+	cfg = cfg.withDefaults()
 
-func NewRouter(r *gin.Engine, production *bool) *gin.Engine {
-	r.Use(brotli.Brotli(brotli.DefaultCompression))
-	r.Use(healthcheck.Default())
-	r.Use(stats.RequestStats())
-	r.Use(rateLimiter)
+	stats := newRequestStats(time.Now())
 
-	r.GET("/stats", func(c *gin.Context) {
-		c.JSON(http.StatusOK, stats.Report())
+	mux := http.NewServeMux()
+	mux.Handle("GET /public/", withStaticCache(cfg.Production, http.StripPrefix("/public/", http.FileServer(http.Dir(cfg.StaticDir)))))
+	mux.HandleFunc("GET /public", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/public/", http.StatusMovedPermanently)
 	})
+	mux.HandleFunc("GET /stats", statsHandler(stats))
+	mux.HandleFunc("GET /{$}", homeHandler(cfg))
+	mux.HandleFunc("GET /cv", cvHandler(cfg))
 
-	r.GET("/", func(c *gin.Context) {
+	var handler http.Handler = mux
+	handler = withCompression(handler)
+	handler = withRateLimit(rate.NewLimiter(50, 200), handler)
+	handler = withStats(stats, handler)
+	handler = withHealthCheck(handler)
+	handler = withRecovery(cfg.Logger, handler)
+	handler = withRequestLogging(cfg.Logger, handler)
+
+	return handler
+}
+
+func (cfg Config) withDefaults() Config {
+	if cfg.StaticDir == "" {
+		cfg.StaticDir = defaultStaticDir
+	}
+	if cfg.DataDir == "" {
+		cfg.DataDir = defaultDataDir
+	}
+	if cfg.Logger == nil {
+		cfg.Logger = slog.Default()
+	}
+	return cfg
+}
+
+func homeHandler(cfg Config) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 		title := "bilte co"
 		description := "Strategy-led software engineering and consulting—delivering impactful results in high-stakes domains."
-		c.HTML(http.StatusOK, "", templates.Home(production, &title, &description))
-	})
 
-	r.GET("/cv", func(c *gin.Context) {
-		var Info domain.Resume
-		var Projects domain.Projects
-		// we are going to get the data in data/resume.json and data/projects.json
-		infoFile, err := os.Open("data/resume.json")
+		err := templates.Render(r.Context(), w, http.StatusOK, templates.Home(&cfg.Production, &title, &description))
 		if err != nil {
-			c.String(http.StatusInternalServerError, "Error opening info file: "+err.Error())
-			return
+			cfg.Logger.Error("failed to render home page", "error", err)
 		}
-		defer infoFile.Close()
+	}
+}
 
-		infoBytes, err := io.ReadAll(infoFile)
+func cvHandler(cfg Config) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		info, projects, err := loadCVData(cfg.DataDir)
 		if err != nil {
-			c.String(http.StatusInternalServerError, "Error reading info file: "+err.Error())
-			return
-		}
-		err = json.Unmarshal(infoBytes, &Info)
-		if err != nil {
-			c.String(http.StatusInternalServerError, "Error unmarshalling info file: "+err.Error())
+			cfg.Logger.Error("failed to load cv data", "error", err)
+			http.Error(w, "Error loading CV data", http.StatusInternalServerError)
 			return
 		}
 
-		projectsFile, err := os.Open("data/projects.json")
+		err = templates.Render(r.Context(), w, http.StatusOK, templates.CV(&cfg.Production, info, projects))
 		if err != nil {
-			c.String(http.StatusInternalServerError, "Error opening projects file: "+err.Error())
-			return
+			cfg.Logger.Error("failed to render cv page", "error", err)
 		}
-		defer projectsFile.Close()
+	}
+}
 
-		projectsBytes, err := io.ReadAll(projectsFile)
-		if err != nil {
-			c.String(http.StatusInternalServerError, "Error reading projects file: "+err.Error())
-			return
-		}
+func loadCVData(dataDir string) (domain.Resume, domain.Projects, error) {
+	var info domain.Resume
+	if err := readJSON(filepath.Join(dataDir, "resume.json"), &info); err != nil {
+		return domain.Resume{}, nil, err
+	}
 
-		err = json.Unmarshal(projectsBytes, &Projects)
-		if err != nil {
-			c.String(http.StatusInternalServerError, "Error unmarshalling projects file: "+err.Error())
-			return
-		}
+	var projects domain.Projects
+	if err := readJSON(filepath.Join(dataDir, "projects.json"), &projects); err != nil {
+		return domain.Resume{}, nil, err
+	}
 
-		c.HTML(http.StatusOK, "", templates.CV(production, Info, Projects))
-	})
+	return info, projects, nil
+}
 
-	return r
+func readJSON(path string, v any) error {
+	b, err := os.ReadFile(path)
+	if err != nil {
+		return err
+	}
+	return json.Unmarshal(b, v)
 }

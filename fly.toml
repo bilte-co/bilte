@@ -7,7 +7,7 @@ app = 'bilte-web'
 primary_region = 'den'
 
 [build]
-dockerfile = "Dockerfile.web"
+dockerfile = "Dockerfile"
 
 [http_service]
 internal_port = 8080
