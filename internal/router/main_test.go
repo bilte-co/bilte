@@ -113,3 +113,43 @@ func TestRouterHealthCheckHeader(t *testing.T) {
 		t.Fatalf("expected health body %q, got %q", "ok", got)
 	}
 }
+
+func TestLoadCVDataLoadsProducts(t *testing.T) {
+	dataDir := t.TempDir()
+	resumeJSON := []byte(`{
+		"products": [{
+			"name": "socky.flights",
+			"role": "Independent Product",
+			"technologies": ["Go", "NATS"],
+			"description": "Real-time aviation intelligence."
+		}]
+	}`)
+	if err := os.WriteFile(filepath.Join(dataDir, "resume.json"), resumeJSON, 0o644); err != nil {
+		t.Fatalf("write resume fixture: %v", err)
+	}
+	if err := os.WriteFile(filepath.Join(dataDir, "projects.json"), []byte(`{}`), 0o644); err != nil {
+		t.Fatalf("write projects fixture: %v", err)
+	}
+
+	resume, projects, err := loadCVData(dataDir)
+	if err != nil {
+		t.Fatalf("load CV data: %v", err)
+	}
+	if len(projects) != 0 {
+		t.Fatalf("expected no projects, got %d", len(projects))
+	}
+	if len(resume.Products) != 1 {
+		t.Fatalf("expected one product, got %d", len(resume.Products))
+	}
+
+	product := resume.Products[0]
+	if product.Name != "socky.flights" || product.Role != "Independent Product" {
+		t.Fatalf("unexpected product identity: %#v", product)
+	}
+	if product.Description != "Real-time aviation intelligence." {
+		t.Fatalf("unexpected product description %q", product.Description)
+	}
+	if len(product.Technologies) != 2 || product.Technologies[0] != "Go" || product.Technologies[1] != "NATS" {
+		t.Fatalf("unexpected product technologies: %#v", product.Technologies)
+	}
+}

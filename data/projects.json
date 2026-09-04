@@ -10,7 +10,7 @@
         "AWS ECS",
         "CI/CD"
       ],
-      "description": "Built BETA's public web platform as a Go and TypeScript service backed by PostgreSQL, containerized on AWS ECS, and delivered through CI/CD. Added site-wide event instrumentation and improved Lighthouse performance, creating a measurable foundation for adoption and conversion analysis."
+      "description": "Architected BETA's public web platform as a Go and TypeScript service backed by PostgreSQL, containerized on AWS ECS, and delivered through CI/CD. Established site-wide event instrumentation and improved Lighthouse performance, creating a measurable foundation for adoption and conversion analysis."
     }
   ],
   "bilte-co": [
@@ -25,16 +25,6 @@
         "htmx"
       ],
       "description": "As sole engineer on a two-person team, delivered an integrated flight-operations insights platform in three months on a five-figure budget. A Go and MQTT ingestion pipeline loaded millions of aircraft and ground-vehicle telemetry points into PostgreSQL and ClickHouse in minutes, revealing previously invisible over-resourcing and utilization gaps. The proof of concept validated the business case for later enterprise-scale investment."
-    },
-    {
-      "client_name": "socky.flights",
-      "technologies": [
-        "Go",
-        "NATS",
-        "PostgreSQL",
-        "htmx"
-      ],
-      "description": "Built a private aerospace performance analysis and competitive intelligence platform that provides realtime airport, fleet, and aircraft performance and utilization metrics, enabling industry comparison, competative research, surfacing trends, and enabling more efficient resource utilization."
     },
     {
       "client_name": "Visionair",

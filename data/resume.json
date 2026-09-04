@@ -15,18 +15,29 @@
       "external": true
     }
   ],
-  "intro": "I build software for ambiguous, data-heavy problems where the first challenge is deciding what the system should be. Over 15+ years, I’ve led airline telemetry and operations analytics, built research software supporting peer-reviewed neuroscience, replatformed an aerospace web ecosystem, and co-founded an agency through acquisition. I set technical direction, make consequential architecture decisions, and stay hands-on through delivery.",
+  "intro": "I lead the strategy, architecture, and delivery of software for ambiguous, data-heavy problems where the first challenge is deciding what the system should be. Across 15+ years, I’ve led airline telemetry and operations analytics, designed research software supporting peer-reviewed neuroscience, replatformed an aerospace web ecosystem, and co-founded and grew an agency to acquisition. I translate business objectives into architecture, platforms, and execution, and stay hands-on through delivery.",
   "competencies": [
     {
-      "name": "Architecture & Leadership",
+      "name": "Leadership & Strategy",
+      "items": [
+        "Technical Strategy",
+        "Platform Roadmaps",
+        "Cross-Functional Leadership",
+        "Stakeholder Communication",
+        "Vendor Evaluation",
+        "Mentorship"
+      ]
+    },
+    {
+      "name": "Architecture & Platforms",
       "items": [
         "System Design",
-        "Data Pipelines",
         "Distributed Systems",
-        "Observability",
-        "Technical Strategy",
-        "Stakeholder Communication",
-        "Mentorship"
+        "Event-Driven Architecture",
+        "Real-Time Systems",
+        "Data Pipelines",
+        "API Design",
+        "Observability"
       ]
     },
     {
@@ -37,26 +48,23 @@
         "ClickHouse",
         "Elasticsearch",
         "MQTT",
+        "NATS",
         "Docker",
         "AWS",
-        "CI/CD",
-        "Prometheus"
+        "CI/CD"
       ]
     },
     {
-      "name": "Core Engineering",
+      "name": "Engineering Foundation",
       "items": [
         "Go",
         "TypeScript",
         "JavaScript",
         "PHP",
         "SQL",
-        "REST APIs"
+        "React",
+        "Next.js"
       ]
-    },
-    {
-      "name": "Frontend",
-      "items": ["React", "Next.js", "htmx"]
     }
   ],
   "experience": [
@@ -68,23 +76,24 @@
       "start": "2025",
       "end": null,
       "bullets": [
-        "Defined a web strategy that repositioned BETA's site from a brochure into an educational platform for an emerging industry, designed to improve organic and AI-assisted discovery while better representing the company's maturity and capabilities.",
-        "Own the platform architecture and roadmap, establishing the development lifecycle, environments, and operating model for a production-grade web platform.",
-        "Positioned the website as an integration point across the company's broader technology stack, expanding its value to sales, operations, and leadership.",
-        "Established a structured measurement strategy that gives marketing and leadership visibility into user behavior, engagement, and conversion."
+        "Defined and led execution of a web strategy to reposition BETA's site from a brochure into an educational platform for an emerging industry, with organic and AI-assisted discovery as explicit design goals.",
+        "Own platform architecture and roadmap across the application, data layer, cloud infrastructure, deployment pipeline, analytics, and integrations, establishing the development lifecycle, environments, and operating model for a production-grade platform.",
+        "Position the website as an integration point across the company's broader technology stack, expanding its role beyond marketing to support sales, operations, and leadership.",
+        "Established the measurement strategy and site-wide event instrumentation that give marketing and leadership visibility into user behavior, engagement, and conversion."
       ]
     },
     {
       "name": "Bilte Co",
       "slug": "bilte-co",
       "role": "Founder & Principal Consultant",
-      "description": "Independent software consultancy providing architecture, product development, and fractional technical leadership to startups, research groups, and enterprise teams.",
+      "description": "Technical consultancy and product studio providing platform architecture, product development, systems integration, and fractional technical leadership to startups, research groups, and enterprise teams.",
       "start": "2019",
-      "end": null,
+      "end": "2025",
       "bullets": [
-        "Lead architecture and hands-on delivery for digital platforms, internal tools, and enterprise integrations for clients including Southwest Airlines, Yale University, and NetApp.",
-        "Translate ambiguous commercial or research goals into scoped delivery plans, technical roadmaps, and production software under constrained timelines and budgets.",
-        "Assemble, mentor, and lead senior teams for multidisciplinary engagements, owning delivery quality from discovery through launch."
+        "Lead technical strategy, architecture, and hands-on delivery for digital platforms, data systems, internal tools, and enterprise integrations for organizations including Southwest Airlines, Yale University, and NetApp.",
+        "Advise client stakeholders on platform architecture and modernization, translating ambiguous commercial or research goals into scoped delivery plans, technical roadmaps, and production software under constrained timelines and budgets.",
+        "Assemble, mentor, and lead senior multidisciplinary teams, owning architecture and delivery quality from discovery through launch.",
+        "Own product architecture and hands-on engineering for socky.flights, extending Bilte's work beyond client consulting into independent product development."
       ]
     },
     {
@@ -100,6 +109,14 @@
         "Built trusted executive and technical relationships that supported deeper engagements and sustained strong year-over-year revenue growth throughout the agency's six years.",
         "Served as senior technical lead across frontend, backend, CMS, ecommerce, and enterprise marketing work, pairing hands-on implementation with team mentorship."
       ]
+    }
+  ],
+  "products": [
+    {
+      "name": "socky.flights",
+      "role": "Independent Product",
+      "technologies": ["Go", "NATS", "PostgreSQL", "htmx"],
+      "description": "Architected and built an aviation intelligence platform that transforms real-time airport, fleet, and aircraft data into performance and utilization benchmarks, supporting competitive research, surfacing operational trends, and informing more efficient resource planning."
     }
   ],
   "other_experience": [
@@ -161,6 +178,6 @@
     "rock climbing",
     "surfing",
     "restoring vintage vehicles",
-    "homelab tinkering"
+    "ancient history"
   ]
 }

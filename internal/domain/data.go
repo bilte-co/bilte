@@ -10,6 +10,13 @@ type Project struct {
 	Description  string   `json:"description"`
 }
 
+type Product struct {
+	Name         string   `json:"name"`
+	Role         string   `json:"role"`
+	Technologies []string `json:"technologies"`
+	Description  string   `json:"description"`
+}
+
 type Link struct {
 	Name     string `json:"name"`
 	URL      string `json:"url"`
@@ -67,6 +74,7 @@ type Resume struct {
 	Intro           string            `json:"intro"`
 	Competencies    []Competency      `json:"competencies"`
 	Experience      []Experience      `json:"experience"`
+	Products        []Product         `json:"products"`
 	OtherExperience []OtherExperience `json:"other_experience"`
 	Education       []Education       `json:"education"`
 	Publications    []Publication     `json:"publications"`

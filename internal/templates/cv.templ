@@ -37,7 +37,7 @@ templ CV(production *bool, info domain.Resume, projects domain.Projects) {
 					</ul>
 					<p>{ info.Intro }</p>
 					if len(info.Competencies) > 0 {
-						<h3>Technical Competencies</h3>
+						<h3>Leadership &amp; Technical Capabilities</h3>
 						for _, comp := range info.Competencies {
 							<p><strong>{ comp.Name }: </strong><span class="mono">{ strings.Join(comp.Items, ", ") }</span></p>
 						}
@@ -58,7 +58,7 @@ templ CV(production *bool, info domain.Resume, projects domain.Projects) {
 								if len(projs) > 0 {
 									<ul class="work">
 										for _, proj := range projs {
-											<li>
+											<li class="cv-entry">
 												<p><strong>{ proj.ClientName }: </strong>{ proj.Description }</p>
 												<code class="mono">[{ strings.Join(proj.Technologies, ", ") }]</code>
 											</li>
@@ -67,6 +67,20 @@ templ CV(production *bool, info domain.Resume, projects domain.Projects) {
 								}
 							}
 						}
+					}
+					if len(info.Products) > 0 {
+						<h3>Selected Products &amp; Ventures</h3>
+						<ul class="work products">
+							for _, product := range info.Products {
+								<li class="cv-entry">
+									<p><strong>{ product.Name }</strong> | { product.Role }</p>
+									<p>{ product.Description }</p>
+									if len(product.Technologies) > 0 {
+										<code class="mono">[{ strings.Join(product.Technologies, ", ") }]</code>
+									}
+								</li>
+							}
+						</ul>
 					}
 					if len(info.OtherExperience) > 0 {
 						<h3>Other Professional Experience</h3>

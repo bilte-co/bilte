@@ -5,10 +5,11 @@ import (
 	"testing"
 )
 
-func TestResumeJSONUsesEducationAndPublicationsKeys(t *testing.T) {
+func TestResumeJSONUsesExpectedKeys(t *testing.T) {
 	data, err := json.Marshal(Resume{
 		Education:    []Education{{Name: "Example University"}},
 		Publications: []Publication{{Title: "Example Publication"}},
+		Products:     []Product{{Name: "Example Product"}},
 	})
 	if err != nil {
 		t.Fatalf("marshal resume: %v", err)
@@ -19,12 +20,12 @@ func TestResumeJSONUsesEducationAndPublicationsKeys(t *testing.T) {
 		t.Fatalf("unmarshal resume object: %v", err)
 	}
 
-	for _, key := range []string{"education", "publications"} {
+	for _, key := range []string{"education", "publications", "products"} {
 		if _, ok := fields[key]; !ok {
 			t.Errorf("expected JSON field %q", key)
 		}
 	}
-	for _, key := range []string{"Education", "Publications"} {
+	for _, key := range []string{"Education", "Publications", "Products"} {
 		if _, ok := fields[key]; ok {
 			t.Errorf("unexpected JSON field %q", key)
 		}

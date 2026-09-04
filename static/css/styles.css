@@ -309,6 +309,20 @@ body.cv h3 {
     margin-bottom: 0;
 }
 
+@media print {
+    body.cv h3,
+    body.cv h4 {
+        break-after: avoid-page;
+        page-break-after: avoid;
+    }
+
+    body.cv .bullets > li,
+    body.cv .cv-entry {
+        break-inside: avoid-page;
+        page-break-inside: avoid;
+    }
+}
+
 h2 {
     font-weight: 500;
     font-size: 1.75rem;
