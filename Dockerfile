@@ -1,57 +1,17 @@
-# Dockerfile.distroless
-FROM golang:1.27-bookworm as base
+FROM golang:1.27-trixie AS base
 WORKDIR /app
 COPY . .
 RUN go mod download
 RUN go mod verify
 RUN CGO_ENABLED=0 go build -trimpath -buildvcs=false -ldflags "-w -s" -o ./bilte ./cmd
 
-# Use a full debian image instead of slim to ensure shells and package managers are available
-FROM debian:bullseye as tailscale
-# SHELL ["/bin/bash", "-c"]
-RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# Copy Tailscale binaries from the tailscale image
-COPY --from=docker.io/tailscale/tailscale:stable /usr/local/bin/tailscaled /usr/local/bin/tailscaled
-COPY --from=docker.io/tailscale/tailscale:stable /usr/local/bin/tailscale /usr/local/bin/tailscale
-RUN mkdir -p /var/run/tailscale /var/cache/tailscale /var/lib/tailscale
-
-# Prepare the start script with proper permissions
-COPY ./scripts/web.sh /tmp/start.sh
-RUN chmod +x /tmp/start.sh
-
-# Final stage using distroless
-FROM busybox:1.35.0-uclibc as busybox
-FROM gcr.io/distroless/base-debian11
+# Static binary (CGO_ENABLED=0), so the libc-free static image is enough.
+FROM gcr.io/distroless/static-debian13
 
 WORKDIR /app
 
-COPY --from=busybox /bin/sh /bin/sh
-
-# Copy your application binary
+# The server reads ./data and ./static from disk at runtime.
 COPY --from=base /app /app
 
-# Copy Tailscale binaries and directories
-COPY --from=tailscale /usr/local/bin/tailscaled /app/tailscaled
-COPY --from=tailscale /usr/local/bin/tailscale /app/tailscale
-COPY --from=tailscale /var/run/tailscale /var/run/tailscale
-COPY --from=tailscale /var/cache/tailscale /var/cache/tailscale
-COPY --from=tailscale /var/lib/tailscale /var/lib/tailscale
-
-# Copy necessary certificates for HTTPS connections
-COPY --from=tailscale /etc/ssl/certs /etc/ssl/certs
-
-# Copy your startup script (with proper permissions)
-COPY --from=tailscale /tmp/start.sh /app/start.sh
-
-# Since we're using distroless, we need to directly execute the binary instead of a shell script
-# Option 1: Execute your bilte binary directly
-# CMD ["/app/bilte", "api"]
-
-# Option 2: If you must use the script and it's a shell script, switch to a base image with a shell
-# FROM gcr.io/distroless/base-debian11
-ENTRYPOINT ["/bin/sh"]
-CMD ["/app/start.sh"]
+ENTRYPOINT ["/app/bilte"]
+CMD ["web"]
