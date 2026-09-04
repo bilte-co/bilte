@@ -1,5 +1,5 @@
 # Dockerfile.distroless
-FROM golang:1.24-bullseye as base
+FROM golang:1.27-bullseye as base
 WORKDIR /app
 COPY . .
 RUN go mod download

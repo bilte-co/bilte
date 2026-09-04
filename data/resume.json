@@ -59,6 +59,14 @@
   ],
   "experience": [
     {
+      "name": "BETA Technologies",
+      "slug": "beta-technologies",
+      "role": "Marketing Technology Lead",
+      "description": "BETA is an aerospace and defense company designing, manufacturing and selling high-performance electric aircraft, advanced electric propulsion systems, components and charging systems to top operators worldwide.",
+      "start": "2025",
+      "end": null
+    },
+    {
       "name": "Bilte Co",
       "slug": "bilte-co",
       "role": "owner",

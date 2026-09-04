@@ -1,6 +1,6 @@
 module github.com/bilte-co/bilte
 
-go 1.24.3
+go 1.27
 
 require (
 	github.com/RaMin0/gin-health-check v0.0.0-20180807004848-a677317b3f01
